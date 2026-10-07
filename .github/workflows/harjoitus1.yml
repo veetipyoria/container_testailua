@@ -14,9 +14,12 @@ jobs:
       - name: Push
         if: failure() || success()
         run: |
-          git config --global --add safe.directory
+          git config --global --add safe.directory '-'
           git config --global user.name 'vpyoria24'
           git config --global user.email 'vpyoria24@students.oamk.fi'
           git add .
           git commit -m 'tests' || true
           git push
+      - name: last-step
+        if: failure()
+        run: echo 'Test failed'
