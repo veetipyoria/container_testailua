@@ -1,0 +1,21 @@
+name: tehtävä1
+on: workflow_dispatch
+
+jobs:
+  container-job:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/playwright:v1.63.0-noble
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          npm ci
+          npm test -- test1 > test1.txt || true
+      - run: npm test -- test2 > test2.txt
+      - name: Push
+        if: failure() || success()
+        run: |
+          git config user.email 'vpyoria24@students.oamk.fi'
+          git config user.name 'vpyoria24'
+          git add .
+          git commit -m 'tests' || true
+          git push
