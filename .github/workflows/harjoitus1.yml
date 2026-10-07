@@ -8,12 +8,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - run: |
+          git config --global --add safe.directory "$(pwd)"
+          git status
+      - run: |
           npm ci
           npm test -- test1 > test1.txt || true
       - run: npm test -- test2 > test2.txt
-      - run: |
-          git config --global --add safe.directory "$(pwd)"
-          git status
       - name: Push
         if: failure() || success()
         run: |
