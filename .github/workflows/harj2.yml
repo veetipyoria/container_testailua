@@ -10,4 +10,4 @@ jobs:
         run: echo "Push into production"
       - name: other
         if: ${{github.ref_name != 'main'}}
-        run: echo "Branch name is "${{github.ref_name}}"
+        run: echo "Branch name is ${{github.ref_name}}"
