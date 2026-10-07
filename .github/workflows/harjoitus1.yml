@@ -14,6 +14,9 @@ jobs:
       - name: Push
         if: failure() || success()
         run: |
+          git config --global --add safe.directory "$(pwd)"
+          git status
+          git config --global user.name 'vpyoria24'
           git config --global user.email 'vpyoria24@students.oamk.fi'
           git add .
           git commit -m 'tests' || true
